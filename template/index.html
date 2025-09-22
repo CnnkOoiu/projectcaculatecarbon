@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carbon Calculator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Carbon & Biomass Calculator</h1>
+    <form method="POST" action="/" novalidate>
+            <label for="calc_type">เลือกการคำนวณ</label>
+            <select id="calc_type" name="calc_type" onchange="showFields()" required>
+                <option value="">-- เลือก --</option>
+                <option value="perfect_area">พื้นที่สำรวจเพิ่ม</option>
+                <option value="radians_index">ค่าดัชนี</option>
+                <option value="ba_carbon">พื้นที่หน้าตัด</option>
+                <option value="dbh_type">ชนิดต้นไม้</option>
+                <option value="allometric">มวลชีวภาพ</option>
+                <option value="calculate_C">ดูดซับคาร์บอน</option>
+            </select>
+            <div id="group-perfect_area" class="input-group hidden">
+                <label>ค่าส่วนเบี่ยงเบนมาตรฐาน</label>
+                <input type="number" step="any" name="s" required>
+                <label>ค่าความคลาดเคลื่อนที่ยอมรับได้</label>
+                <input type="number" step="any" name="e" required>
+            </div>
+            <div id="group-radians_index" class="input-group hidden">
+                <label>ประเภทดัชนี (1-4)</label>
+                <select name="R" required>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+                <label>ค่าตัวตั้ง</label>
+                <input type="number" step="any" name="D_P" required>
+                <label>ค่าตัวหาร</label>
+                <input type="number" step="any" name="D_P_all" required>
+            </div>
+            <div id="group-ba_carbon" class="input-group hidden">
+                <label>ค่าเส้นรอบวง (DBH)</label>
+                <input type="number" step="any" name="DBH" required>
+            </div>
+            <div id="group-dbh_type" class="input-group hidden">
+                <label>ค่าเส้นรอบวง (DBH)</label>
+                <input type="number" step="any" name="DBH" required>
+                <label>ความสูง (height)</label>
+                <input type="number" step="any" name="height" required>
+            </div>
+            <div id="group-allometric" class="input-group hidden">
+                <label>ค่าเส้นรอบวง (DBH)</label>
+                <input type="number" step="any" name="DBH" required>
+                <label>ความสูง (height)</label>
+                <input type="number" step="any" name="height" required>
+                <label>ประเภทป่า (1-7)</label>
+                <select name="forest" required onchange="document.getElementById('bamboo_type_allometric').style.display = this.value == '6' ? 'block' : 'none';">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                </select>
+                <div id="bamboo_type_allometric" style="display:none">
+                    <label>ชนิดไผ่ (1-4)</label>
+                    <select name="bamboo_type">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                </div>
+            </div>
+            <div id="group-calculate_C" class="input-group hidden">
+                <label>ค่าเส้นรอบวง (DBH)</label>
+                <input type="number" step="any" name="DBH" required>
+                <label>ความสูง (height)</label>
+                <input type="number" step="any" name="height" required>
+                <label>ประเภทป่า (1-7)</label>
+                <select name="forest" required onchange="document.getElementById('bamboo_type_C').style.display = this.value == '6' ? 'block' : 'none';">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                </select>
+                <label>พื้นที่สำรวจทั้งหมด</label>
+                <input type="number" step="any" name="all_area" required>
+                <div id="bamboo_type_C" style="display:none">
+                    <label>ชนิดไผ่ (1-4)</label>
+                    <select name="bamboo_type">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                </div>
+            </div>
+            <button type="submit">คำนวณ</button>
+        </form>
+    </div>
+    <!-- JS is loaded via main.js -->
+</body>
+</html>
