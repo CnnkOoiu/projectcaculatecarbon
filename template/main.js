@@ -1,6 +1,3 @@
-// main.js
-// Enhance symmetry and modern UI with JS only for field display logic
-
 document.addEventListener('DOMContentLoaded', function() {
     function showFields() {
         var type = document.getElementById('calc_type').value;
@@ -22,9 +19,9 @@ document.addEventListener('DOMContentLoaded', function() {
     var calcType = document.getElementById('calc_type');
     if (calcType) {
         calcType.addEventListener('change', showFields);
-        showFields(); // Initial call for page load
+        showFields(); 
     }
-    // Bamboo type field toggle for allometric and calculate_C
+    
     var forestSelects = document.querySelectorAll('select[name="forest"]');
     forestSelects.forEach(function(select) {
         select.addEventListener('change', function() {
