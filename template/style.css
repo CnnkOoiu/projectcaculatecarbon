@@ -70,7 +70,7 @@ th {
 tr:last-child td {
     border-bottom: none;
 }
-/* Symmetry and modern look */
+
 .container, table, input, select, button {
     box-sizing: border-box;
 }
